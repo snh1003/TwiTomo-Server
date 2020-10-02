@@ -1,0 +1,19 @@
+{
+  "type": "postgres",
+  "host": "db",
+  "port": 3306,
+  "username": "users",
+  "password": "1234",
+  "database": "sampledb",
+
+  "synchronize": false,
+  "logging": false,
+  "entities": ["entities/**/*.ts"],
+  "migrations": ["db/migrations/**/*.ts"],
+  "subscribers": ["db/subscribers/**/*.ts"],
+  "cli": {
+    "entitiesDir": "entities",
+    "migrationsDir": "db/migrations",
+    "subscribersDir": "db/subscribers"
+  }
+}

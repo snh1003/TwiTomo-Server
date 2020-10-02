@@ -9,11 +9,13 @@ services:
     ports:
       - 3000:3000
   db:
-    image: postgres
+    image: postgres:latest
     volumes:
       - ./docker/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=sampledb
-      - POSTGRES_USER=users
-      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=testDB
+      - POSTGRES_USER=hong
+      - POSTGRES_PASSWORD=admin
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    ports:
+      - 5432:5432
