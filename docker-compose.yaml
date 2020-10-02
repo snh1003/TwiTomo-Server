@@ -14,7 +14,7 @@ services:
       - ./docker/data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=testDB
-      - POSTGRES_USER=hong
+      - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8
     ports:
