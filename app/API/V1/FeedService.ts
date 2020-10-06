@@ -15,4 +15,8 @@ router.post('/', async (req, res) => {
             }
 });
 
+router.get('/', async (req, res) => {
+    const feeds = await Feed.find()
+})
+
 export default router
