@@ -2,12 +2,21 @@ import express from 'express'
 import Feed from "../../entities/Feed";
 
 const router: express.Router = express.Router();
-const feed = new Feed()
+
 
 router.post('/', async (req, res) => {
-            const { title, name, tag, location, dday, money, peaple, content, photo } = req.body;
+    const { title, name, tag, location, dday, money, peaple, content, photo } = req.body;
+    const feed = new Feed()
+    await feed.save({
 
-            const feeds = await Feed.(req.params.id);
+    })
+    feed.content = content;
+    feed.day = dday;
+    feed.name = name;
+    feed.location = location;
+    feed.Money = money;
+    feed.People = peaple;
+    feed.
             if (feeds) {
                 res.status(200).json(feeds.comment);
             } else {
