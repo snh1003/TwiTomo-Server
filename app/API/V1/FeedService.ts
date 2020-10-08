@@ -3,9 +3,6 @@ import Feed from "../../entities/Feed";
 import {getManager} from "typeorm";
 
 const router: express.Router = express.Router();
-// @ts-ignore
-// const wrap = fn => (...args) => fn(...args).catch(e => args[2]({err: e,status :400}))
-const wrap = fn => (...args) => fn(...args)
 
 router.post('/',async (req:express.Request, res:express.Response, next:express.NextFunction) => {
     const feed = getManager().getRepository(Feed)
@@ -13,7 +10,7 @@ router.post('/',async (req:express.Request, res:express.Response, next:express.N
     try {
         await feed.save(newFeed)
     }catch(e){
-    next({text: e,status: 400})
+        next({text: e,status: 400})
         return;
     }
 
