@@ -1,5 +1,5 @@
 import express from 'express'
-import {BaseEntity, Connection, createConnection} from "typeorm";
+import {Connection, createConnection} from "typeorm";
 import Feed from "./API/V1/FeedService"
 
 
@@ -11,6 +11,17 @@ createConnection()
 
 const app: express.Express = express()
 
+const logErrors = (err:{text:string,status:number}, req:express.Request, res:express.Response, next:express.NextFunction) => {
+    console.error(err.status + 'stack');
+    next(err);
+}
+
+const errorHandler = (err:{text:string,status:number}, req:express.Request, res:express.Response, next:express.NextFunction) => {
+    res.status( err.status || 500);
+    res.send({ error: err.text });
+}
+
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
@@ -20,4 +31,6 @@ app.listen(3001,()=>{ console.log('Example app listening on port 3000!') })
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/', Feed)
+app.use(logErrors);
+app.use(errorHandler);
 
