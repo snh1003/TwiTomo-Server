@@ -1,30 +1,27 @@
 import express from 'express'
 import Feed from "../../entities/Feed";
+import {getManager} from "typeorm";
 
 const router: express.Router = express.Router();
+// @ts-ignore
+// const wrap = fn => (...args) => fn(...args).catch(e => args[2]({err: e,status :400}))
+const wrap = fn => (...args) => fn(...args)
 
+router.post('/',async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    const newFeed = feed.create(req.body)
+    try {
+        await feed.save(newFeed)
+    }catch(e){
+    next({text: e,status: 400})
+        return;
+    }
 
-router.post('/', async (req, res) => {
-    const { title, name, tag, location, dday, money, peaple, content, photo } = req.body;
-    const feed = new Feed()
-    await feed.save({
-
-    })
-    feed.content = content;
-    feed.day = dday;
-    feed.name = name;
-    feed.location = location;
-    feed.Money = money;
-    feed.People = peaple;
-    feed.
-            if (feeds) {
-                res.status(200).json(feeds.comment);
-            } else {
-                res.status(404).json({error: 'BadRequest'});
-            }
+    res.send(newFeed)
 });
 
 router.get('/', async (req, res) => {
+    console.log('hahahaha')
     const feeds = await Feed.find()
 })
 
