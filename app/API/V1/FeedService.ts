@@ -9,17 +9,22 @@ router.post('/',async (req:express.Request, res:express.Response, next:express.N
     const newFeed = feed.create(req.body)
     try {
         await feed.save(newFeed)
+        res.send(newFeed)
     }catch(e){
         next({text: e,status: 400})
         return;
     }
-
-    res.send(newFeed)
 });
 
-router.get('/', async (req, res) => {
-    console.log('hahahaha')
-    const feeds = await Feed.find()
+router.get('/', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    try {
+        const FeedAll = await feed.find()
+        res.send(FeedAll)
+    }catch (e) {
+        next({text:e, status: 400})
+    }
+
 })
 
 export default router
