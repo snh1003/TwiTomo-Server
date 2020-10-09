@@ -24,10 +24,10 @@ export class Feed extends BaseEntity {
     day! : Date
 
     @Column()
-    Money! : number
+    money! : number
 
     @Column()
-    People! : string
+    people! : string
 
     @Column()
     content!: string
