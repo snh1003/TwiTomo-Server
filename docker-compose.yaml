@@ -7,11 +7,11 @@ services:
       - ./app:/app
     tty: true
     ports:
-      - 3000:3000
+      - 4000:4000
   db:
     image: postgres:11-alpine
     ports:
-      - 5433:5432
+      - 5432:5432
     environment:
         POSTGRES_USER: admin
         POSTGRES_DB: test
