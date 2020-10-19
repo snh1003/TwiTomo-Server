@@ -14,7 +14,7 @@ export class Feed extends BaseEntity {
     @Column()
     profile!: string
 
-    @Column("varchar",{array: true})
+    @Column({type: "text", array: true})
     tag!: string[]
 
     @Column()
@@ -24,7 +24,7 @@ export class Feed extends BaseEntity {
     day! : Date
 
     @Column()
-    money! : number
+    money! : string
 
     @Column()
     people! : string
@@ -33,7 +33,7 @@ export class Feed extends BaseEntity {
     content!: string
 
     @Column()
-    photo: string = '';
+    photo!: string;
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt!: Date;
