@@ -8,6 +8,7 @@ services:
     tty: true
     ports:
       - 4000:4000
+    command: sh -c "yarn start"
   db:
     image: postgres:11-alpine
     ports:
