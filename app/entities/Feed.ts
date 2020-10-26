@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn} from 'typeorm'
+import {Entity, PrimaryGeneratedColumn, Column,　Timestamp, BaseEntity, CreateDateColumn} from 'typeorm'
 
 @Entity()
 export class Feed extends BaseEntity {
@@ -36,7 +36,7 @@ export class Feed extends BaseEntity {
     photo!: string;
 
     @CreateDateColumn({ name: 'created_at' })
-    createdAt!: Date;
+    createdAt!: Timestamp;
 
     @Column("varchar",{array: true})
     join : string[] =  []
