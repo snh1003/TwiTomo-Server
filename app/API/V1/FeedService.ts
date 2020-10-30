@@ -11,7 +11,8 @@ router.post('/', upload.single('photo'), async (req:express.Request, res:express
         console.log('원본파일명 : ' + req.file.originalname)
         console.log('저장파일명 : ' + req.file.filename)
         console.log('크기 : ' + req.file.size)
-        console.log('haha' + req.body.photo)
+
+
 
         const feed = getManager().getRepository(Feed)
         const newFeed = feed.create(req.body)
@@ -28,13 +29,23 @@ router.post('/', upload.single('photo'), async (req:express.Request, res:express
 
 router.get('/', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
     const feed = getManager().getRepository(Feed)
+    const { limit = 10 } = req.query;
     try {
-        const FeedAll = await feed.find()
+        const FeedAll = await feed.find({take: limit as number})
         res.send(FeedAll)
     }catch (e) {
         next({text:e, status: 400})
     }
+})
 
+router.get('/:id', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    try {
+        const FeedOne = await feed.findOne({where:{id: req.params.id}})
+        res.send(FeedOne)
+    }catch (e) {
+        next({text:e, status: 400})
+    }
 })
 
 export default router
