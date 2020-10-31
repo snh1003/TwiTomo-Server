@@ -8,9 +8,6 @@ const router: express.Router = express.Router();
 
 router.post('/', upload.single('photo'), async (req:express.Request, res:express.Response, next:express.NextFunction) => {
         req.body.photo = req.file.filename
-        console.log('원본파일명 : ' + req.file.originalname)
-        console.log('저장파일명 : ' + req.file.filename)
-        console.log('크기 : ' + req.file.size)
 
 
 
