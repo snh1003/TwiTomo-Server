@@ -8,9 +8,6 @@ const router: express.Router = express.Router();
 
 router.post('/', upload.single('photo'), async (req:express.Request, res:express.Response, next:express.NextFunction) => {
         req.body.photo = req.file.filename
-
-
-
         const feed = getManager().getRepository(Feed)
         const newFeed = feed.create(req.body)
         try {
@@ -44,5 +41,16 @@ router.get('/:id', async (req:express.Request, res:express.Response, next:expres
         next({text:e, status: 400})
     }
 })
+
+router.get('/location/:location', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    try {
+        const FeedOne = await feed.findOne({where:{location: req.params.location}})
+        res.send(FeedOne)
+    }catch (e) {
+        next({text:e, status: 400})
+    }
+})
+
 
 export default router
