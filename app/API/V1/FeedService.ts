@@ -45,12 +45,23 @@ router.get('/:id', async (req:express.Request, res:express.Response, next:expres
 router.get('/location/:location', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
     const feed = getManager().getRepository(Feed)
     try {
-        const FeedOne = await feed.findOne({where:{location: req.params.location}})
+        const FeedOne = await feed.find({where:{location: req.params.location}})
         res.send(FeedOne)
     }catch (e) {
         next({text:e, status: 400})
     }
 })
+
+router.get('/tag/:tag', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    try {
+        const FeedOne = await feed.find({where:{location: req.params.location}})
+        res.send(FeedOne)
+    }catch (e) {
+        next({text:e, status: 400})
+    }
+})
+
 
 
 export default router
