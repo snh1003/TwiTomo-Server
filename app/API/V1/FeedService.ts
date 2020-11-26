@@ -55,13 +55,22 @@ router.get('/location/:location', async (req:express.Request, res:express.Respon
 router.get('/tag/:tag', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
     const feed = getManager().getRepository(Feed)
     try {
-        const FeedOne = await feed.find({where:{location: req.params.location}})
+        const FeedOne = await feed.find({where:{location: req.params.tag}})
         res.send(FeedOne)
     }catch (e) {
         next({text:e, status: 400})
     }
 })
 
+router.get('/myFeed/:id', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
+    const feed = getManager().getRepository(Feed)
+    try {
+        const FeedOne = await feed.find({where:{id: req.params.id}})
+        res.send(FeedOne)
+    }catch (e) {
+        next({text:e, status: 400})
+    }
+})
 
 
 export default router
