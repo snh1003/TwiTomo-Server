@@ -2,7 +2,6 @@ import express from 'express'
 import Feed from "../../entities/Feed";
 import {getManager} from "typeorm";
 import {upload} from "./fileupload";
-import multer from "multer";
 
 const router: express.Router = express.Router();
 
@@ -18,7 +17,6 @@ router.post('/', upload.single('photo'), async (req:express.Request, res:express
             return;
         }
     }
-
 );
 
 router.get('/', async (req:express.Request, res:express.Response, next:express.NextFunction) => {
